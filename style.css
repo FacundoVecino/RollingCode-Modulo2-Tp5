@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.terriermon {
+    width: 400px;
+    height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url(/FHGWG9DUcAMMDef\ \(1\)\ \(1\).png);
+  }
+
+.contentHome {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
