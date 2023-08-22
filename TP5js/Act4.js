@@ -1,27 +1,40 @@
-function updateClock() {
-    const dayOfWeekElement = document.getElementById("dayOfWeek");
-    const dateElement = document.getElementById("date");
-    const timeElement = document.getElementById("time");
+function actualizarReloj() {
+    const datos = document.getElementById("datos");
+    const tiempo = document.getElementById("tiempo");
 
-    const daysOfWeek = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const diasDeSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-    const now = new Date();
-    const dayOfWeek = daysOfWeek[now.getDay()];
-    const dayOfMonth = now.getDate();
-    const month = months[now.getMonth()];
-    const year = now.getFullYear();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+    const fecha = new Date();
+    const diaDeSemana = diasDeSemana [fecha.getDay()];
+    const diaDeMes = fecha.getDate();
+    const mes = meses[fecha.getMonth()];
+    const año = fecha.getFullYear();
+    let horas = fecha.getHours();
+    let minutos = fecha.getMinutes();
+    let segundos = fecha.getSeconds();
+    let ampm = ""
+        if(horas > 12){
+          horas = horas - 12;
+          ampm = "PM";
+        } else {
+          ampm = "AM";
+        }
 
-    dayOfWeekElement.textContent = `Día de la semana: ${dayOfWeek}`;
-    dateElement.textContent = `Fecha: ${dayOfMonth} de ${month} de ${year}`;
-    timeElement.textContent = `Hora: ${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if(horas < 10){
+          horas = "0" + horas;
+        } 
+        if(minutos < 10){
+          minutos = "0" + minutos;
+        }
+        if(segundos < 10){
+          segundos = "0" + segundos
+        }
 
-    setTimeout(updateClock, 1000); // Actualizar cada segundo
+    datos.textContent = `${diaDeSemana} ${diaDeMes} de ${mes} del ${año}`;
+    tiempo.textContent = `${horas}:${minutos}:${segundos} ${ampm}`;
+    
+    setTimeout(actualizarReloj, 1000); 
   }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    updateClock(); // Iniciar el reloj al cargar la página
-  });
+    
+  actualizarReloj(); 

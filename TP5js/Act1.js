@@ -1,33 +1,31 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const startBtn = document.getElementById("startBtn");
-    const gameArea = document.getElementById("gameArea");
-    const guessInput = document.getElementById("guessInput");
-    const guessBtn = document.getElementById("guessBtn");
+const botonComienzo = document.getElementById("botonComienzo");
+const numero = document.getElementById("numero");
+const entradaUsuario = document.getElementById("entradaUsuario");
+const botonAdivinar = document.getElementById("botonAdivinar");
 
-    let magicNumber;
+let numeroMagico;
 
-    startBtn.addEventListener("click", function() {
-      magicNumber = Math.floor(Math.random() * 100) + 1;
-      startBtn.classList.add("d-none");
-      gameArea.classList.remove("d-none");
-    });
+botonComienzo.addEventListener("click", function() {
+  numeroMagico = Math.floor(Math.random() * 100) + 1;
+  botonComienzo.classList.add("d-none");
+  numero.classList.remove("d-none");
+});
 
-    guessBtn.addEventListener("click", function() {
-      const userGuess = parseInt(guessInput.value);
-      if (userGuess === magicNumber) {
-        alert("Bien ahi mi ruey!!!");
-        resetGame();
-      } else if (userGuess < magicNumber) {
-        alert("Waaa, es mayor que eso");
-      } else {
-        alert("Noo burro, es menor");
-      }
-      guessInput.value = "";
-    });
+botonAdivinar.addEventListener("click", function() {
+  const numeroUsuario = parseInt(entradaUsuario.value);
+  if (numeroUsuario === numeroMagico) {
+    alert("Bien ahi mi ruey!!!");
+    resetGame();
+  } else if (numeroUsuario < numeroMagico) {
+    alert("Waaa tontooo, es mayor que eso");
+  } else {
+    alert("Noo burro, es menor");
+  }
+  entradaUsuario.value = "";
+});
 
-    function resetGame() {
-      magicNumber = null;
-      startBtn.classList.remove("d-none");
-      gameArea.classList.add("d-none");
-    }
-  });
+function resetGame() {
+  numeroMagico = null;
+  botonComienzo.classList.remove("d-none");
+  numero.classList.add("d-none");
+}

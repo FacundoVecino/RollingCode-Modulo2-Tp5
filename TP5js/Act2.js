@@ -71,14 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             } 
         }
-        
-        
-        
-        generaDNI() {
-           const numeroDNI = Math.floor(Math.random() * 100000000); // Número aleatorio de 8 cifras
-           this.DNI = numeroDNI.toString();
-           console.log("DNI generado:", this.DNI);
-        }
       
         mostrarGeneracion() {
           const generacion = this.calcularGeneracion();
