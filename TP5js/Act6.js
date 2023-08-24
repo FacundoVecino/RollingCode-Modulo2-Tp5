@@ -1,47 +1,53 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const timerElement = document.getElementById("timer");
-    const timeInput = document.getElementById("timeInput");
-    const startBtn = document.getElementById("startBtn");
-    const pauseBtn = document.getElementById("pauseBtn");
-    const resetBtn = document.getElementById("resetBtn");
+  const temporizador = document.getElementById("temporizador");
+  const ingresoTiempo = document.getElementById("ingresoTiempo");
+  const botonInicio = document.getElementById("botonInicio");
+  const botonPausa = document.getElementById("botonPausa");
+  const botonReinicio = document.getElementById("botonReinicio");
 
-    let timeRemaining = 0;
-    let intervalId;
-    let isRunning = false;
+  let tiempoRestante = 0;
+  let intervaloId;
+  let enCurso = false;
 
-    function updateTimer() {
-      if (timeRemaining > 0) {
-        timeRemaining--;
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        const formattedTime = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-        timerElement.textContent = formattedTime;
-      } else {
-        clearInterval(intervalId);
-        isRunning = false;
-        timerElement.textContent = "00:00";
-      }
+  function updateTimer() {
+    if (tiempoRestante > 0) {
+      tiempoRestante--;
+      const minutos = Math.floor(tiempoRestante / 60);
+      const segundos = tiempoRestante % 60;
+      const tiempoFormateado = `${minutos.toString().padStart(2, "0")}:${segundos.toString().padStart(2, "0")}`;
+      temporizador.textContent = tiempoFormateado;
+    } else {
+      clearInterval(intervaloId);
+      enCurso = false;
+      temporizador.textContent = "00:00";
     }
+  }
 
-    startBtn.addEventListener("click", function() {
-      if (!isRunning) {
-        timeRemaining = parseInt(timeInput.value);
-        intervalId = setInterval(updateTimer, 1000);
-        isRunning = true;
-      }
-    });
-
-    pauseBtn.addEventListener("click", function() {
-      if (isRunning) {
-        clearInterval(intervalId);
-        isRunning = false;
-      }
-    });
-
-    resetBtn.addEventListener("click", function() {
-      clearInterval(intervalId);
-      isRunning = false;
-      timeInput.value = "60";
-      timerElement.textContent = "00:00";
-    });
+  botonInicio.addEventListener("click", function() {
+    if (!enCurso) {
+      tiempoRestante = parseInt(ingresoTiempo.value);
+      intervaloId = setInterval(updateTimer, 1000);
+      enCurso = true;
+      botonInicio.style.display = "none";
+      botonPausa.style.display = "block";
+    }
   });
+
+  botonPausa.addEventListener("click", function() {
+    if (enCurso) {
+      clearInterval(intervaloId);
+      enCurso = false;
+      botonPausa.style.display = "none";
+      botonInicio.style.display = "block";
+    }
+  });
+
+  botonReinicio.addEventListener("click", function() {
+    clearInterval(intervaloId);
+    enCurso = false;
+    ingresoTiempo.value = "60";
+    temporizador.textContent = "00:00";
+    botonPausa.style.display = "none";
+    botonInicio.style.display = "block";
+  });
+});
