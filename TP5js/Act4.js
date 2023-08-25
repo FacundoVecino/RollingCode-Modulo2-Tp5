@@ -15,8 +15,10 @@ function actualizarReloj() {
     let segundos = fecha.getSeconds();
     let ampm = ""
         if(horas >= 12){
-          horas = horas - 12;
           ampm = "PM";
+          if (horas === 13){
+            horas = horas - 12;
+          }
         } else {
           ampm = "AM";
         }
